@@ -1,0 +1,13 @@
+*~
+autom4te.cache/
+*.in
+/aclocal.m4
+/compile
+/config.guess
+/config.sub
+/configure
+/depcomp
+/install-sh
+/missing
+/ChangeLog
+/flintqs-*.tar.gz
