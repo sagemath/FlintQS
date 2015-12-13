@@ -467,7 +467,7 @@ void computeSizes(unsigned long numPrimes)
      primeSizes = (unsigned char *) calloc(sizeof(unsigned char),numPrimes);
      for (unsigned long i = 0; i<numPrimes; i++)
      {
-         primeSizes[i]=(unsigned char)floor(log(factorBase[i])/log(2.0)-FUDGE+0.5);
+         primeSizes[i]=(unsigned char)floor(log((double)factorBase[i])/log(2.0)-FUDGE+0.5);
      }
      
      return;
