@@ -1,0 +1,50 @@
+QStodo
+=======
+
+1. ***Check for duplicate ordinary relations
+2. ***Make large prime cutoff table
+3. ***Change sievediv to 1 for all but 60 digit factorizations or separate into tuning files
+4. Make sieve look for additional relations if factorization fails
+5. ***Set all LESS values to 0
+6. ***Update old version of sieve to include new corrected polynomial choosing
+7. ***Make better polynomial choosing code
+8. ***Write ordinary relations to file
+9. ***Fix all printf %d's etc
+10. Make structures in memory smaller by using shorter data types
+11. Pass pointers to structs to functions
+12. Use structs instead of separated data types
+13. Remove second copy of large prime check for negated value
+14. ***Remove printf's from lanczos code
+15. Ensure polynomial chooser can't pick wrong A factors
+16. ***Count actual number of relations, not including duplicates
+17. ***Check more often near end of sieving if we are done
+18. ***Replace all errors with aborts
+19. Replace all file operations with safe ones
+20. Clean up after a run, i.e. free memory allocated
+21. Introduce hash tables for computers with large caches
+22. In candidate evaluation, multiply by inverses modulo a large prime instead of dividing out by each prime. (maybe not for version 0.99)
+23. Adjust 4X sieve eval code for factorisations under 40 digits
+24. Make reentrant and into a single callable function
+25. Make parallelisable
+26. Package output into factor tree
+27. Integrate into Pari
+28. Rename .cpp to .c and make compile with gcc
+29. Integrate into FLINT makefile
+30. Remove sievediv
+31. ***Use unique filenames
+32. Write README file
+
+a. 
+b. Optimise for other architectures
+c. Comment code
+d. 
+e. 
+f. 
+
+I. ***Add single prime variant 
+II. Add double prime variant
+III. Optimize cache usage for larger factor bases 
+IV. Implement SQUFOf, elliptic curve, pollard-brent, etc and make single factoring algorithm
+
+*** Already done.
+
