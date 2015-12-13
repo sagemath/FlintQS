@@ -1563,7 +1563,7 @@ void mainRoutine(unsigned long Mdiv2, mpz_t n, unsigned long multiplier)
    Function: Factors a user specified number using a quadratic sieve
 
 ===========================================================================*/
-int main(int argc, unsigned char *argv[])
+int main(int argc, char *argv[])
 {
     unsigned long multiplier;
 
