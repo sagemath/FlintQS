@@ -1553,6 +1553,7 @@ void mainRoutine(unsigned long Mdiv2, mpz_t n, unsigned long multiplier)
            gmp_printf("%Zd\n",temp);
         }
     }
+    free(nullrows);
     mpz_clear(factor);
     return;
 }
@@ -1644,21 +1645,43 @@ int main(int argc, char *argv[])
 #endif
     if (tmp_dir == NULL) tmp_dir = "./";
     char * delfile;
+    char * unique_name;
     
-    delfile = get_filename(tmp_dir,unique_filename("comb"));
+    unique_name = unique_filename("comb");
+    delfile = get_filename(tmp_dir,unique_name);
     remove(delfile);
-    delfile = get_filename(tmp_dir,unique_filename("frels"));
+    free(delfile);
+    free(unique_name);
+    unique_name = unique_filename("frels");
+    delfile = get_filename(tmp_dir,unique_name);
     remove(delfile);
-    delfile = get_filename(tmp_dir,unique_filename("flprels"));
+    free(delfile);
+    free(unique_name);
+    unique_name = unique_filename("flprels");
+    delfile = get_filename(tmp_dir,unique_name);
     remove(delfile);
-    delfile = get_filename(tmp_dir,unique_filename("lpnew"));
+    free(delfile);
+    free(unique_name);
+    unique_name = unique_filename("lpnew");
+    delfile = get_filename(tmp_dir,unique_name);
     remove(delfile);
-    delfile = get_filename(tmp_dir,unique_filename("rels"));
+    free(delfile);
+    free(unique_name);
+    unique_name = unique_filename("rels");
+    delfile = get_filename(tmp_dir,unique_name);
     remove(delfile);
-    delfile = get_filename(tmp_dir,unique_filename("fnew"));
+    free(delfile);
+    free(unique_name);
+    unique_name = unique_filename("fnew");
+    delfile = get_filename(tmp_dir,unique_name);
     remove(delfile);
-    delfile = get_filename(tmp_dir,unique_filename("lprels"));
+    free(delfile);
+    free(unique_name);
+    unique_name = unique_filename("lprels");
+    delfile = get_filename(tmp_dir,unique_name);
     remove(delfile);
+    free(delfile);
+    free(unique_name);
       
     return 0;
 }

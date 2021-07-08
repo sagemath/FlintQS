@@ -80,7 +80,11 @@ FILE * flint_fopen(char * name, char * mode)
   char * tmp_dir = getenv("TMPDIR");
 #endif
   if (tmp_dir == NULL) tmp_dir = "./";
-  FILE * temp_file = fopen(get_filename(tmp_dir,unique_filename(name)),mode);
+  char * unique_name = unique_filename(name);
+  char * file_name = get_filename(tmp_dir,unique_name);
+  FILE * temp_file = fopen(file_name,mode);
+  free(file_name);
+  free(unique_name);
   if (!temp_file)
   {
      printf("Unable to open temporary file\n");
@@ -497,10 +501,14 @@ long mergesort_lp_file(char *REL_str, char *NEW_str, char *TMP_str, FILE *COMB)
   char * tmp_dir = getenv("TMPDIR");
 #endif
   if (tmp_dir == NULL) tmp_dir = "./";
-  char * TMP_name = get_filename(tmp_dir,unique_filename(TMP_str));
-  char * REL_name = get_filename(tmp_dir,unique_filename(REL_str));
+  char * TMP_unique = unique_filename(TMP_str);
+  char * REL_unique = unique_filename(REL_str);
+  char * TMP_name = get_filename(tmp_dir,TMP_unique);
+  char * REL_name = get_filename(tmp_dir,REL_unique);
   FILE * TMP = fopen(TMP_name,"w");
   FILE * REL = fopen(REL_name,"r");
+  free(REL_unique);
+  free(TMP_unique);
   if ((!TMP) || (!REL))
   {
      printf("Unable to open temporary file\n");
@@ -516,6 +524,8 @@ long mergesort_lp_file(char *REL_str, char *NEW_str, char *TMP_str, FILE *COMB)
      printf("Cannot rename file %s to %s", TMP_str, REL_str);
      abort();
   } 
+  free(REL_name);
+  free(TMP_name);
   return tp;
 }
 
