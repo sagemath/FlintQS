@@ -510,7 +510,6 @@ void evaluateSieve(unsigned long ** relations, unsigned long ctimesreps, unsigne
      unsigned long modp;
      unsigned long * sieve2;
      unsigned char bits;
-     long numfactors;
      unsigned long factnum;
      char * last_ptr;
      char Q_str[200];
@@ -546,8 +545,6 @@ void evaluateSieve(unsigned long ** relations, unsigned long ctimesreps, unsigne
               
            bits=mpz_sizeinbase(res,2);
            bits-=errorbits;
-              
-           numfactors=0;
               
            extra = 0;
            if (factorBase[0]!=1)
