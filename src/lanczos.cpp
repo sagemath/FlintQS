@@ -55,7 +55,7 @@ static const u_int64_t bitmask[64] = {
 };
 
 /*--------------------------------------------------------------------*/
-u_int64_t getNullEntry(u_int64_t * nullrows, long i, long l) {
+u_int64_t getNullEntry(u_int64_t * nullrows, unsigned long i, unsigned long l) {
    
    /* Returns true if the entry with indices i,l is 1 in the
       supplied 64xN matrix. This is used to read the nullspace

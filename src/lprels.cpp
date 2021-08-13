@@ -182,7 +182,7 @@ long sort_lp_file(const char *filename)
       bufspace = MPQS_STRING_LENGTH;
       if (fgets(cur_line, bufspace, TMP) == NULL) { free(buf); break; }
 
-      if (buflist - buflist_head >= buflist_size) abort();
+      if ((unsigned long)(buflist - buflist_head) >= buflist_size) abort();
       
       /* remember buffer for later deallocation */
       *buflist++ = buf;
@@ -200,7 +200,7 @@ long sort_lp_file(const char *filename)
     {
       size_t lg1;
       buf = (char*) malloc(MPQS_STRING_LENGTH * sizeof(char));
-      if (buflist - buflist_head >= buflist_size) abort();
+      if ((unsigned long)(buflist - buflist_head) >= buflist_size) abort();
       /* remember buffer for later deallocation */
       *buflist++ = buf;
 

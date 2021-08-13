@@ -148,7 +148,7 @@ matrix constructMat(u_int32_t cols, u_int32_t rows)
         exit(1);
      }
      
-     for (int32_t i = 0; i < rows; i++)  //make second matrix identity, i.e. 1's along diagonal
+     for (u_int32_t i = 0; i < rows; i++)  //make second matrix identity, i.e. 1's along diagonal
      {
          insertEntry(m,i,i+32*dwords);
      }
