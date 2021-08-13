@@ -504,10 +504,10 @@ void tonelliShanks(unsigned long numPrimes,mpz_t n)
 void evaluateSieve(unsigned long ** relations, unsigned long ctimesreps, unsigned long M, unsigned char * sieve, mpz_t A, mpz_t B, mpz_t C, unsigned long * soln1, unsigned long * soln2, long polyadd, unsigned long * polycorr, mpz_t * XArr, unsigned long * aind, long min, long s,unsigned long multiplier, long * exponents, la_col_t* colarray, unsigned long * factors, char * rel_str, FILE* LPNEW,FILE* RELS)
 {
      long i,j;
-     register unsigned long k;
+     unsigned long k;
      unsigned long exponent, vv;
      unsigned char extra;
-     register unsigned long modp;
+     unsigned long modp;
      unsigned long * sieve2;
      unsigned char bits;
      long numfactors;
@@ -777,11 +777,11 @@ void evaluateSieve(unsigned long ** relations, unsigned long ctimesreps, unsigne
 =============================================================================*/
 void sieveInterval(unsigned long M, unsigned long numPrimes, unsigned char * sieve, long last, long first, long polyadd, unsigned long * soln1, unsigned long * soln2, unsigned long * polycorr, unsigned char * * offsets, unsigned char * * offsets2)
 {
-     register unsigned char currentprimesize; 
-     register unsigned long currentprime;
+     unsigned char currentprimesize;
+     unsigned long currentprime;
      unsigned char * position2;
-     register unsigned char * position;
-     register long diff;
+     unsigned char * position;
+     long diff;
      unsigned char * end;
      unsigned long ptimes4;
      long correction;
@@ -826,7 +826,7 @@ void sieveInterval(unsigned long M, unsigned long numPrimes, unsigned char * sie
         diff=position2-position;
         
         ptimes4 = currentprime*4;
-        register unsigned char * bound=end-ptimes4;
+        unsigned char * bound=end-ptimes4;
         while (bound - position > 0)  
         {  
 	      (* position)+=currentprimesize,(* (position+diff))+=currentprimesize, position+=currentprime;
@@ -879,7 +879,7 @@ void sieveInterval(unsigned long M, unsigned long numPrimes, unsigned char * sie
         diff=position2-position;
            
         ptimes4 = 2*currentprime;
-        register unsigned char * bound=end-ptimes4;
+        unsigned char * bound=end-ptimes4;
         while (bound - position > 0)  
         {  
               (* position)+=currentprimesize,(* (position+diff))+=currentprimesize, position+=currentprime;
@@ -918,10 +918,10 @@ void sieveInterval(unsigned long M, unsigned long numPrimes, unsigned char * sie
 =========================================================================== */
 void sieve2(unsigned long M, unsigned long numPrimes, unsigned char * sieve, long last, long first, long polyadd, unsigned long * soln1, unsigned long * soln2, unsigned long * polycorr, unsigned char * * offsets, unsigned char * * offsets2)
 {
-     register unsigned char currentprimesize; 
-     register unsigned long currentprime;
-     register unsigned char * position2;
-     register unsigned char * position;
+     unsigned char currentprimesize;
+     unsigned long currentprime;
+     unsigned char * position2;
+     unsigned char * position;
      unsigned char * end;
      long correction;
      
