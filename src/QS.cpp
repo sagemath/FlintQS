@@ -1638,9 +1638,9 @@ int main(int argc, char *argv[])
     
     getchar();
 #if defined(WINCE) || defined(macintosh)
-    char * tmp_dir = NULL;
+    const char * tmp_dir = NULL;
 #else
-    char * tmp_dir = getenv("TMPDIR");
+    const char * tmp_dir = getenv("TMPDIR");
 #endif
     if (tmp_dir == NULL) tmp_dir = "./";
     char * delfile;
