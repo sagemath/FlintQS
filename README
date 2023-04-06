@@ -1,4 +1,8 @@
-William Hart's Quadratic Sieve
+Standalone CLI implementation of William Hart's Quadratic Sieve.
 
-Release tarballs will be at
-http://files.sagemath.org/spkg/upstream/flintqs/
+William Hart was the maintainer of FLINT (https://www.flintlib.org/)
+for many years; a modern and actively-maintained version of this
+quadratic sieve is available in FLINT itself, as qsieve_factor().
+There remain unfixed build issues and at least one security
+vulnerability (CVE-2023-29465) in FlintQS. As a result, FlintQS is
+considered obsolete.
