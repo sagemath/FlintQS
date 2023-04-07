@@ -335,7 +335,8 @@ unsigned long knuthSchroeppel(mpz_t n)
     float factors[NUMMULTS];
     float logpdivp;
     mpz_t prime, r, mult;
-    long kron, multindex;
+    long kron;
+    size_t multindex;
     
     mpz_init(prime);
     mpz_init(r);
@@ -503,14 +504,12 @@ void tonelliShanks(unsigned long numPrimes,mpz_t n)
 ===========================================================================*/
 void evaluateSieve(unsigned long ** relations, unsigned long ctimesreps, unsigned long M, unsigned char * sieve, mpz_t A, mpz_t B, mpz_t C, unsigned long * soln1, unsigned long * soln2, long polyadd, unsigned long * polycorr, mpz_t * XArr, unsigned long * aind, long min, long s,unsigned long multiplier, long * exponents, la_col_t* colarray, unsigned long * factors, char * rel_str, FILE* LPNEW,FILE* RELS)
 {
-     long i,j;
-     register unsigned long k;
+     unsigned long i, j, k;
      unsigned long exponent, vv;
      unsigned char extra;
-     register unsigned long modp;
+     unsigned long modp;
      unsigned long * sieve2;
      unsigned char bits;
-     long numfactors;
      unsigned long factnum;
      char * last_ptr;
      char Q_str[200];
@@ -546,8 +545,6 @@ void evaluateSieve(unsigned long ** relations, unsigned long ctimesreps, unsigne
               
            bits=mpz_sizeinbase(res,2);
            bits-=errorbits;
-              
-           numfactors=0;
               
            extra = 0;
            if (factorBase[0]!=1)
@@ -732,7 +729,7 @@ void evaluateSieve(unsigned long ** relations, unsigned long ctimesreps, unsigne
 #ifdef RELPRINT
                     printf("....R\n");
 #endif
-                    for (long i = 0; i<firstprime; i++) 
+                    for (unsigned long i = 0; i<firstprime; i++)
                     {
                        if (exponents[i]) add_factor(&last_ptr, (unsigned long) exponents[i], (unsigned long) i);
                     }
@@ -777,11 +774,11 @@ void evaluateSieve(unsigned long ** relations, unsigned long ctimesreps, unsigne
 =============================================================================*/
 void sieveInterval(unsigned long M, unsigned long numPrimes, unsigned char * sieve, long last, long first, long polyadd, unsigned long * soln1, unsigned long * soln2, unsigned long * polycorr, unsigned char * * offsets, unsigned char * * offsets2)
 {
-     register unsigned char currentprimesize; 
-     register unsigned long currentprime;
+     unsigned char currentprimesize;
+     unsigned long currentprime;
      unsigned char * position2;
-     register unsigned char * position;
-     register long diff;
+     unsigned char * position;
+     long diff;
      unsigned char * end;
      unsigned long ptimes4;
      long correction;
@@ -826,7 +823,7 @@ void sieveInterval(unsigned long M, unsigned long numPrimes, unsigned char * sie
         diff=position2-position;
         
         ptimes4 = currentprime*4;
-        register unsigned char * bound=end-ptimes4;
+        unsigned char * bound=end-ptimes4;
         while (bound - position > 0)  
         {  
 	      (* position)+=currentprimesize,(* (position+diff))+=currentprimesize, position+=currentprime;
@@ -879,7 +876,7 @@ void sieveInterval(unsigned long M, unsigned long numPrimes, unsigned char * sie
         diff=position2-position;
            
         ptimes4 = 2*currentprime;
-        register unsigned char * bound=end-ptimes4;
+        unsigned char * bound=end-ptimes4;
         while (bound - position > 0)  
         {  
               (* position)+=currentprimesize,(* (position+diff))+=currentprimesize, position+=currentprime;
@@ -918,10 +915,10 @@ void sieveInterval(unsigned long M, unsigned long numPrimes, unsigned char * sie
 =========================================================================== */
 void sieve2(unsigned long M, unsigned long numPrimes, unsigned char * sieve, long last, long first, long polyadd, unsigned long * soln1, unsigned long * soln2, unsigned long * polycorr, unsigned char * * offsets, unsigned char * * offsets2)
 {
-     register unsigned char currentprimesize; 
-     register unsigned long currentprime;
-     register unsigned char * position2;
-     register unsigned char * position;
+     unsigned char currentprimesize;
+     unsigned long currentprime;
+     unsigned char * position2;
+     unsigned char * position;
      unsigned char * end;
      long correction;
      
@@ -1116,7 +1113,7 @@ void mainRoutine(unsigned long Mdiv2, mpz_t n, unsigned long multiplier)
     offsets2 = (unsigned char * *)calloc(numPrimes,sizeof(unsigned char *));
      
     relations = (unsigned long * *) calloc(relSought,sizeof(unsigned long *));
-    for (long i = 0; i < relSought; i++)
+    for (unsigned long i = 0; i < relSought; i++)
     {
        relations[i] = (unsigned long *) calloc(200, sizeof(unsigned long));
     }
@@ -1154,9 +1151,9 @@ void mainRoutine(unsigned long Mdiv2, mpz_t n, unsigned long multiplier)
            while (j!=i)
            {
               ran++;
-              for (j=0;((j<i)&&(aind[j]!=ran));j++);
+              for (j=0;((j<i)&&(aind[j]!=(unsigned long)ran));j++);
            }
-           aind[i] = ran;
+           aind[i] = (unsigned long)ran;
            mpz_mul_ui(A,A,factorBase[ran+min]);
            i++;
            if (i < s-1)
@@ -1166,9 +1163,9 @@ void mainRoutine(unsigned long Mdiv2, mpz_t n, unsigned long multiplier)
               while (j!=i)
               {
                  ran++;
-                 for (j=0;((j<i)&&(aind[j]!=ran));j++);
+                 for (j=0;((j<i)&&(aind[j]!=(unsigned long)ran));j++);
               }
-              aind[i] = ran;
+              aind[i] = (unsigned long)ran;
               mpz_mul_ui(A,A,factorBase[ran+min]);
               i++;
            } 
@@ -1179,11 +1176,11 @@ void mainRoutine(unsigned long Mdiv2, mpz_t n, unsigned long multiplier)
         fact-=min;
         do
         {
-           for (j=0;((j<i)&&(aind[j]!=fact));j++);
+           for (j=0;((j<i)&&(aind[j]!=(unsigned long)fact));j++);
            fact++;
         } while (j!=i);
         fact--;
-        aind[i] = fact;
+        aind[i] = (unsigned long)fact;
         mpz_mul_ui(A,A,factorBase[fact+min]); 
            
         for (long i=0; i<s; i++)
@@ -1210,7 +1207,7 @@ void mainRoutine(unsigned long Mdiv2, mpz_t n, unsigned long multiplier)
            mpz_add(B,B,Bterms[i]);
         }
             
-        for (long i=0; i<numPrimes; i++)
+        for (unsigned long i=0; i<numPrimes; i++)
         {
            p = factorBase[i];
 	       Ainv[i] = modinverse(mpz_fdiv_r_ui(temp,A,p),p);
@@ -1473,7 +1470,8 @@ void mainRoutine(unsigned long Mdiv2, mpz_t n, unsigned long multiplier)
          nullrows = block_lanczos(nrows, 0, ncols, colarray);
      } while (nullrows == NULL);
      
-     long i,j, mask;
+     unsigned long i;
+     long j, mask;
      
      for (i = 0, mask = 0; i < ncols; i++)
 		mask |= nullrows[i];
@@ -1521,25 +1519,25 @@ void mainRoutine(unsigned long Mdiv2, mpz_t n, unsigned long multiplier)
     
 // Now do the "square root" and GCD steps hopefully obtaining factors of n
     printf("FACTORS:\n");
-    for (long l = 0;l<64;l++)
+    for (unsigned long l = 0;l<64;l++)
     {
         while (!(mask & ((u_int64_t)(1) << l))) l++;
         mpz_set_ui(temp,1);
         mpz_set_ui(temp2,1);
         memset(primecount,0,numPrimes*sizeof(unsigned long));
-        for (long i = 0; i<ncols; i++)
+        for (unsigned long i = 0; i<ncols; i++)
         {
            if (getNullEntry(nullrows,i,l)) 
            {
               mpz_mul(temp2,temp2,XArr[colarray[i].orig]);
-              for (long j=1; j<=relations[colarray[i].orig][0]; j++)
+              for (unsigned long j=1; j<=relations[colarray[i].orig][0]; j++)
               {
                  primecount[relations[colarray[i].orig][j]]++;
               }
            }
            if (i%30==0) mpz_mod(temp2,temp2,n);
         }
-        for (long j = 0; j<numPrimes; j++) 
+        for (unsigned long j = 0; j<numPrimes; j++)
         {
            mpz_set_ui(temp3,factorBase[j]);
            mpz_pow_ui(temp3,temp3,primecount[j]/2);
@@ -1638,9 +1636,9 @@ int main(int argc, char *argv[])
     
     getchar();
 #if defined(WINCE) || defined(macintosh)
-    char * tmp_dir = NULL;
+    const char * tmp_dir = NULL;
 #else
-    char * tmp_dir = getenv("TMPDIR");
+    const char * tmp_dir = getenv("TMPDIR");
 #endif
     if (tmp_dir == NULL) tmp_dir = "./";
     char * delfile;

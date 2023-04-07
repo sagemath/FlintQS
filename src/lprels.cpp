@@ -45,7 +45,7 @@
     Concatenates a filename and directory name to give a full path 
 */
 
-char * get_filename(char *dir, char *s)
+char * get_filename(const char *dir, const char *s)
 {
   char *buf = (char *) malloc(strlen(dir) + strlen(s) + 2);
 #if defined(__EMX__) || defined(WINCE)
@@ -56,7 +56,7 @@ char * get_filename(char *dir, char *s)
   return buf;
 }
 
-char * unique_filename(char *s)
+char * unique_filename(const char *s)
 {
   char *buf, suf[64];
   size_t lsuf;
@@ -72,12 +72,12 @@ char * unique_filename(char *s)
 }
 
 
-FILE * flint_fopen(char * name, char * mode)
+FILE * flint_fopen(const char * name, const char * mode)
 {
 #if defined(WINCE) || defined(macintosh)
-  char * tmp_dir = NULL;
+  const char * tmp_dir = NULL;
 #else
-  char * tmp_dir = getenv("TMPDIR");
+  const char * tmp_dir = getenv("TMPDIR");
 #endif
   if (tmp_dir == NULL) tmp_dir = "./";
   FILE * temp_file = fopen(get_filename(tmp_dir,unique_filename(name)),mode);
@@ -111,7 +111,7 @@ int relations_cmp(const void *a, const void *b)
     Writes the given string to the given file and aborts upon error
 */
 
-void flint_fputs(char *s, FILE *file)
+void flint_fputs(const char *s, FILE *file)
 {
   if (fputs(s, file) < 0)
   {
@@ -127,7 +127,7 @@ void flint_fputs(char *s, FILE *file)
    file. Returns the number of relations after sorting and discarding.
 */
 
-long sort_lp_file(char *filename)
+long sort_lp_file(const char *filename)
 {
   FILE *TMP;
   char *old_s, *buf, *cur_line;
@@ -182,7 +182,7 @@ long sort_lp_file(char *filename)
       bufspace = MPQS_STRING_LENGTH;
       if (fgets(cur_line, bufspace, TMP) == NULL) { free(buf); break; }
 
-      if (buflist - buflist_head >= buflist_size) abort();
+      if ((unsigned long)(buflist - buflist_head) >= buflist_size) abort();
       
       /* remember buffer for later deallocation */
       *buflist++ = buf;
@@ -200,7 +200,7 @@ long sort_lp_file(char *filename)
     {
       size_t lg1;
       buf = (char*) malloc(MPQS_STRING_LENGTH * sizeof(char));
-      if (buflist - buflist_head >= buflist_size) abort();
+      if ((unsigned long)(buflist - buflist_head) >= buflist_size) abort();
       /* remember buffer for later deallocation */
       *buflist++ = buf;
 
@@ -487,14 +487,14 @@ long mergesort_lp_file_internal(FILE *LPREL, FILE *LPNEW, FILE *COMB, FILE *TMP)
    Perform mergesort of large prime files
 */
 
-long mergesort_lp_file(char *REL_str, char *NEW_str, char *TMP_str, FILE *COMB)
+long mergesort_lp_file(const char *REL_str, const char *NEW_str, const char *TMP_str, FILE *COMB)
 {
   FILE *NEW = flint_fopen(NEW_str, "r");
   
 #if defined(WINCE) || defined(macintosh)
-  char * tmp_dir = NULL;
+  const char * tmp_dir = NULL;
 #else
-  char * tmp_dir = getenv("TMPDIR");
+  const char * tmp_dir = getenv("TMPDIR");
 #endif
   if (tmp_dir == NULL) tmp_dir = "./";
   char * TMP_name = get_filename(tmp_dir,unique_filename(TMP_str));

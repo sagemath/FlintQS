@@ -36,7 +36,7 @@ typedef struct {
 	unsigned long orig;         /* Original relation number */
 } la_col_t;
 
-u_int64_t getNullEntry(u_int64_t *, long, long);
+u_int64_t getNullEntry(u_int64_t *, unsigned long, unsigned long);
 void reduce_matrix(unsigned long *, unsigned long *, la_col_t *);
 u_int64_t * block_lanczos(unsigned long, unsigned long, unsigned long, la_col_t*);
 
@@ -55,7 +55,7 @@ static inline void insertColEntry(la_col_t* colarray, unsigned long colNum, unsi
        {
            temp = colarray[colNum].data;
            colarray[colNum].data = (unsigned long*)malloc((colarray[colNum].weight+16)*sizeof(unsigned long));
-           for (long i = 0; i<colarray[colNum].weight; i++)
+           for (unsigned long i = 0; i<colarray[colNum].weight; i++)
            {
                colarray[colNum].data[i] = temp[i];
            }
@@ -77,7 +77,7 @@ static inline void insertColEntry(la_col_t* colarray, unsigned long colNum, unsi
 ===========================================================================*/
 static inline void xorColEntry(la_col_t* colarray, unsigned long colNum, unsigned long entry)
 {
-   for (long i = 0; i < colarray[colNum].weight; i++)
+   for (unsigned long i = 0; i < colarray[colNum].weight; i++)
      if (colarray[colNum].data[i] == entry) 
      {
         for (unsigned long j = i; j < colarray[colNum].weight - 1; j++)
